@@ -2,7 +2,7 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) throws StackOverflowException, StackUnderflowException {
-        System.out.println("Stack!");
+        System.out.println(" Stack! ");
         Stack s1 = new Stack();
 
         System.out.println(s1);
