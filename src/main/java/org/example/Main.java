@@ -1,29 +1,78 @@
 package org.example;
 
-public class Main {
-    public static void main(String[] args) throws StackOverflowException, StackUnderflowException {
-        System.out.println(" Stack! ");
-        Stack s1 = new Stack();
+import java.util.Arrays;
 
-        System.out.println(s1);
-        s1.push(10);
-        System.out.println(s1);
-        s1.push(20);
-        System.out.println(s1);
-        s1.push(30);
-        System.out.println(s1);
-        s1.push(40);
-        System.out.println(s1);
-        s1.push(50);
-        System.out.println(s1);
-        s1.pop();
-        s1.push(60);
-        System.out.println(s1);
+class Queue {
+    private int[] data;
+    private int inicio;
+    private int fim;
 
-        while (!s1.isEmpty()) {
-            System.out.println(s1.pop());
-            System.out.println(s1);
+    public Queue() {
+        data = new int[5];
+        inicio = 0;
+        fim = 0;
+    }
+
+    public void enqueue(int value) throws QueueFullException {
+        data[fim] = value;
+        if (fim == data.length - 1) {
+            if (inicio == 0) {
+                throw new QueueFullException();
+            }
+            fim = 0;
+        } else {
+            fim = fim + 1;
         }
-        System.out.println(s1);
+    }
+
+    public int dequeue() throws QueueEmptyException {
+        if (inicio == fim) {
+            throw new QueueEmptyException();
+        }
+        int value = data[inicio];
+        if (inicio == data.length - 1) {
+            inicio = 0;
+        } else {
+            inicio = inicio + 1;
+        }
+        return value;
+    }
+
+    @Override
+    public String toString() {
+        return "Queue{" +
+                "data=" + Arrays.toString(data) +
+                ", inicio=" + inicio +
+                ", fim=" + fim +
+                '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws QueueFullException, QueueEmptyException {
+        System.out.println(" Queue! ");
+
+        Queue q1 = new Queue();
+        System.out.println(q1);
+        q1.enqueue(10);
+        System.out.println(q1);
+        q1.enqueue(20);
+        System.out.println(q1);
+        q1.enqueue(30);
+        System.out.println(q1);
+        System.out.println(q1.dequeue());
+        System.out.println(q1);
+        q1.enqueue(40);
+        System.out.println(q1);
+        q1.enqueue(50);
+        System.out.println(q1);
+
+        System.out.println(q1.dequeue());
+        System.out.println(q1);
+        System.out.println(q1.dequeue());
+        System.out.println(q1);
+        System.out.println(q1.dequeue());
+        System.out.println(q1);
+
     }
 }

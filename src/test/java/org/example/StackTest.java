@@ -30,7 +30,7 @@ public class StackTest {
         Stack s = new Stack();
 
         assertThrows(StackUnderflowException.class, () -> {
-            s.push(10);
+            s.pop();
         });
     }
 }
